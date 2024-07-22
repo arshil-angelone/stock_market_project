@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completeness Result | Angel One Vs Upstox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 10px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 2px solid black; /* Add a solid black border */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid black; /* Add a solid black border */
+        }
+
+        th {
+            background-color: #808080;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Dynamic cell color based on content */
+        .yes {
+            background-color: #8bc34a; /* Green */
+            color: #fff;
+        }
+
+        .no {
+            background-color: #FF0000; /* Red */
+            color: #fff;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Completeness Result</h1>
+
+    <form id="filter-form">
+        <label for="filter_min">Filter Difference >=:</label>
+        <input type="number" id="filter_min" name="filter_min" min="0" value="0">
+
+        <label for="filter_max">Filter Difference <:</label>
+        <input type="number" id="filter_max" name="filter_max" min="0" value="">
+
+        <button type="button" onclick="applyFilter()">Apply</button>
+    </form>
+
+    <table id="results-table">
+        <thead>
+            <tr>
+                <th>From Exfeedtime</th>
+                <th>To Exfeedtime</th>
+                <th>ISIN</th>
+                <th>Stock Name</th>
+                <th>Angel Count</th>
+                <th>{{ comparison_type }} Count</th>
+                <th>Count Match</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in comparison_data %}
+                <tr>
+                    <td>{{ row.exfeedtime_from|slice:":19" }}</td>
+                    <td>{{ row.exfeedtime_to|slice:":19" }}</td>
+                    <td>{{ row.isin }}</td>
+                    <td>{{ row.stock_name }}</a></td>
+                    <td>{{ row.angel_count }}</td>
+                    <td>{{ row.comparison_count }}</td>
+                    <td class="{% if row.count_match == 'Yes' %}yes{% else %}no{% endif %}">{{ row.count_match }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</body>
+</html>

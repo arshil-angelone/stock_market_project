@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Result  | Angel One Vs Upstox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 10;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid black; /* Add a solid black border */
+}
+
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+                border: 1px solid black; /* Add a solid black border */
+
+        }
+
+        th {
+            background-color: #808080;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Dynamic cell color based on content */
+        .yes {
+            background-color: #8bc34a; /* Green */
+            color: #fff;
+        }
+
+        .no {
+    background-color: #FF0000; /* Red */
+    color: #fff;
+}
+    </style>
+</head>
+<body>
+    <h1>Comparison Result</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Exfeedtime</th>
+                <th>ISIN</th>
+                <th>Stock Name</th>
+                <th>Angel Open</th>
+                <th>{{comparison_type}} Open</th>
+                <th>Open Match</th>
+                <th>Angel High</th>
+                <th>{{comparison_type}} High</th>
+                <th>High Match</th>
+                <th>Angel Low</th>
+                <th>{{comparison_type}} Low</th>
+                <th>Low Match</th>
+                <th>Angel Close</th>
+                <th>{{comparison_type}} Close</th>
+                <th>Close Match</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in comparison_data %}
+            <tr>
+                <td>{{ row.exfeedtime|slice:":19" }}</td>
+                <td>{{ row.isin }}</td>
+                <td>{{ row.stock_name }}</td>
+                <td>{{ row.angel_open }}</td>
+                <td>{{ row.comparison_open }}</td>
+                <td class="{% if row.open_match == 'Yes' %}yes{% else %}no{% endif %}">{{ row.open_match }}</td>
+                <td>{{ row.angel_high }}</td>
+                <td>{{ row.comparison_high }}</td>
+                <td class="{% if row.high_match == 'Yes' %}yes{% else %}no{% endif %}">{{ row.high_match }}</td>
+                <td>{{ row.angel_low }}</td>
+                <td>{{ row.comparison_low }}</td>
+                <td class="{% if row.low_match == 'Yes' %}yes{% else %}no{% endif %}">{{ row.low_match }}</td>
+                <td>{{ row.angel_close }}</td>
+                <td>{{ row.comparison_close }}</td>
+                <td class="{% if row.close_match == 'Yes' %}yes{% else %}no{% endif %}">{{ row.close_match }}</td>
+            </tr>
+            {% endfor %}
+                        <!-- Total counts row -->
+            <tr>
+                <td colspan="5"><strong>Total Counts</strong></td>
+                <td>{{ open_match_count.Yes }} Yes / {{ open_match_count.No }} No</td>
+                <td colspan="2"></td>
+                <td>{{ high_match_count.Yes }} Yes / {{ high_match_count.No }} No</td>
+                <td colspan="2"></td>
+                <td>{{ low_match_count.Yes }} Yes / {{ low_match_count.No }} No</td>
+                <td colspan="2"></td>
+                <td>{{ close_match_count.Yes }} Yes / {{ close_match_count.No }} No</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Comparison | Angel One Vs Upstox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 10;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 2px solid black;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+
+        th {
+            background-color: #808080;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+      /*  .missing {
+            background-color: #FF0000;
+            color: #fff;
+        }*/
+    </style>
+</head>
+<body>
+    <h1>Detailed Comparison for {{ stock_name }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Token</th>
+                <th>Timestamp</th>
+                <th>Open</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Close</th>
+                <th>Volume</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in missing_candles %}
+            <tr class="missing">
+                <td>{{ row.token }}</td>
+                <td>{{ row.timestamp }}</td>
+                <td>{{ row.open }}</td>
+                <td>{{ row.high }}</td>
+                <td>{{ row.low }}</td>
+                <td>{{ row.close }}</td>
+                <td>{{ row.volume }}</td>
+                <td>{{ row.source }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

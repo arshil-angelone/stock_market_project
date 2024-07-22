@@ -1,0 +1,247 @@
+[E 240603 10:08:37 views:786] API request failed: name 'from_date' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 602, in generate_excel_completeness
+        from_date_angel = from_date + " 00:00"  # Add 09:15 AM as start time for 1 minute or 30 minutes interval
+    NameError: name 'from_date' is not defined
+[E 240603 10:10:22 views:787] API request failed: name 'from_date' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 603, in generate_excel_completeness
+        from_date_angel = from_date + " 00:00"  # Add 09:15 AM as start time for 1 minute or 30 minutes interval
+    NameError: name 'from_date' is not defined
+[E 240603 10:11:05 views:787] API request failed: name 'from_date' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 603, in generate_excel_completeness
+        from_date_angel = from_date + " 00:00"  # Add 09:15 AM as start time for 1 minute or 30 minutes interval
+    NameError: name 'from_date' is not defined
+[E 240603 10:12:21 views:787] API request failed: name 'from_date' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 603, in generate_excel_completeness
+        from_date_angel = from_date + " 00:00"  # Add 09:15 AM as start time for 1 minute or 30 minutes interval
+    NameError: name 'from_date' is not defined
+[E 240603 10:13:02 views:788] API request failed: name 'from_date' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 604, in generate_excel_completeness
+        from_date_angel = from_date + " 00:00"  # Add 09:15 AM as start time for 1 minute or 30 minutes interval
+    NameError: name 'from_date' is not defined
+[E 240603 11:04:43 views:798] API request failed: module 'datetime' has no attribute 'now'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 606, in generate_excel_completeness
+        to_date = datetime.now().strftime('%Y-%m-%d')
+    AttributeError: module 'datetime' has no attribute 'now'
+[E 240603 11:05:09 views:800] API request failed: name 'current_date' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 609, in generate_excel_completeness
+        from_date = current_date - timedelta(days=365 * 3)
+    NameError: name 'current_date' is not defined
+[E 240603 11:05:32 views:800] API request failed: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 609, in generate_excel_completeness
+        from_date = to_date - timedelta(days=365 * 3)
+    TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+[E 240603 11:05:56 views:800] API request failed: name 'timedelta' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 609, in generate_excel_completeness
+        from_date = to_date - timedelta(days=365 * 3)
+    NameError: name 'timedelta' is not defined
+[E 240603 11:06:33 views:801] API request failed: module 'datetime' has no attribute 'now'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 609, in generate_excel_completeness
+        to_date = datetime.now().strftime('%Y-%m-%d')
+    AttributeError: module 'datetime' has no attribute 'now'
+[E 240603 11:09:35 views:801] API request failed: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 610, in generate_excel_completeness
+        from_date = to_date - timedelta(days=365 * 3)
+    TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+[E 240603 11:11:22 views:806] API request failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 227, in _request
+        data = json.loads(r.content.decode("utf8"))
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/__init__.py", line 357, in loads
+        return _default_decoder.decode(s)
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 337, in decode
+        obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 355, in raw_decode
+        raise JSONDecodeError("Expecting value", s, err.value) from None
+    json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 634, in generate_excel_completeness
+        angel_broking_data = smartApi.getCandleData(historicParam)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 462, in getCandleData
+        getCandleDataResponse=self._postRequest("api.candle.data",historicDataParams)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 230, in _request
+        raise ex.DataException("Couldn't parse the JSON response received from the server: {content}".format(
+    SmartApi.smartExceptions.DataException: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+[E 240603 11:12:35 views:806] API request failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 227, in _request
+        data = json.loads(r.content.decode("utf8"))
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/__init__.py", line 357, in loads
+        return _default_decoder.decode(s)
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 337, in decode
+        obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 355, in raw_decode
+        raise JSONDecodeError("Expecting value", s, err.value) from None
+    json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 634, in generate_excel_completeness
+        angel_broking_data = smartApi.getCandleData(historicParam)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 462, in getCandleData
+        getCandleDataResponse=self._postRequest("api.candle.data",historicDataParams)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 230, in _request
+        raise ex.DataException("Couldn't parse the JSON response received from the server: {content}".format(
+    SmartApi.smartExceptions.DataException: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+[E 240603 11:12:58 views:806] API request failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 227, in _request
+        data = json.loads(r.content.decode("utf8"))
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/__init__.py", line 357, in loads
+        return _default_decoder.decode(s)
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 337, in decode
+        obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 355, in raw_decode
+        raise JSONDecodeError("Expecting value", s, err.value) from None
+    json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 634, in generate_excel_completeness
+        angel_broking_data = smartApi.getCandleData(historicParam)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 462, in getCandleData
+        getCandleDataResponse=self._postRequest("api.candle.data",historicDataParams)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 230, in _request
+        raise ex.DataException("Couldn't parse the JSON response received from the server: {content}".format(
+    SmartApi.smartExceptions.DataException: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+[E 240603 11:16:31 views:807] API request failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 227, in _request
+        data = json.loads(r.content.decode("utf8"))
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/__init__.py", line 357, in loads
+        return _default_decoder.decode(s)
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 337, in decode
+        obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 355, in raw_decode
+        raise JSONDecodeError("Expecting value", s, err.value) from None
+    json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 635, in generate_excel_completeness
+        angel_broking_data = smartApi.getCandleData(historicParam)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 462, in getCandleData
+        getCandleDataResponse=self._postRequest("api.candle.data",historicDataParams)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 230, in _request
+        raise ex.DataException("Couldn't parse the JSON response received from the server: {content}".format(
+    SmartApi.smartExceptions.DataException: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+[E 240603 11:17:17 views:807] API request failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 227, in _request
+        data = json.loads(r.content.decode("utf8"))
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/__init__.py", line 357, in loads
+        return _default_decoder.decode(s)
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 337, in decode
+        obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 355, in raw_decode
+        raise JSONDecodeError("Expecting value", s, err.value) from None
+    json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 635, in generate_excel_completeness
+        angel_broking_data = smartApi.getCandleData(historicParam)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 462, in getCandleData
+        getCandleDataResponse=self._postRequest("api.candle.data",historicDataParams)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 230, in _request
+        raise ex.DataException("Couldn't parse the JSON response received from the server: {content}".format(
+    SmartApi.smartExceptions.DataException: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+[E 240603 11:17:48 views:808] API request failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 227, in _request
+        data = json.loads(r.content.decode("utf8"))
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/__init__.py", line 357, in loads
+        return _default_decoder.decode(s)
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 337, in decode
+        obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+      File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 355, in raw_decode
+        raise JSONDecodeError("Expecting value", s, err.value) from None
+    json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 636, in generate_excel_completeness
+        angel_broking_data = smartApi.getCandleData(historicParam)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 462, in getCandleData
+        getCandleDataResponse=self._postRequest("api.candle.data",historicDataParams)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 260, in _postRequest
+        return self._request(route, "POST", params)
+      File "/Users/arshil.khan/Desktop/Main/venv/lib/python3.8/site-packages/SmartApi/smartConnect.py", line 230, in _request
+        raise ex.DataException("Couldn't parse the JSON response received from the server: {content}".format(
+    SmartApi.smartExceptions.DataException: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+[E 240603 12:38:35 views:751] API request failed: local variable 'comparison_data' referenced before assignment
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 748, in generate_excel_completeness
+        return render(request, 'comparison_result.html', {'comparison_data': comparison_data, 'comparison_type':comparison_type})
+    UnboundLocalError: local variable 'comparison_data' referenced before assignment
+[E 240603 12:39:58 views:717] API request failed: name 'ab_ohlcv' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 700, in generate_excel_completeness
+        count_match = "Yes" if ab_ohlcv[0] == upstox_ohlcv[0] else "No"
+    NameError: name 'ab_ohlcv' is not defined
+[E 240603 12:40:12 views:717] API request failed: name 'ab_ohlcv' is not defined
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 700, in generate_excel_completeness
+        count_match = "Yes" if ab_ohlcv[0] == upstox_ohlcv[0] else "No"
+    NameError: name 'ab_ohlcv' is not defined
+[E 240603 12:59:21 views:717] API request failed: 0
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 617, in generate_excel_completeness
+        print("Angel Broking data:",  angel_broking_data[0],angel_broking_data[len(angel_broking_data-1)])
+    KeyError: 0
+[E 240603 13:00:16 views:717] API request failed: 0
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 617, in generate_excel_completeness
+        print("Angel Broking data:",  angel_broking_data[0],angel_broking_data[len(angel_broking_data)-1])
+    KeyError: 0
+[E 240603 13:00:24 views:717] API request failed: 0
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 617, in generate_excel_completeness
+        print("Angel Broking data:",  angel_broking_data[0],angel_broking_data[len(angel_broking_data)-1])
+    KeyError: 0
+[E 240603 13:02:05 views:717] API request failed: 0
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 617, in generate_excel_completeness
+        print("Angel Broking data:",  angel_broking_data[0],angel_broking_data[-1])
+    KeyError: 0
+[E 240603 13:03:03 smartConnect:243] Error occurred while making a POST request to https://apiconnect.angelbroking.com/rest/auth/angelbroking/user/v1/loginByPassword. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelbroking.com/rest/auth/angelbroking/user/v1/loginByPassword, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '82:1a:a0:a5:f4:bd', 'Accept': 'application/json', 'X-PrivateKey': 'JDldPrre', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'clientcode': 'A912156', 'password': '3628', 'totp': '148334'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 240603 13:03:03 views:589] {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 240603 13:03:26 views:719] API request failed: 0
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 618, in generate_excel_completeness
+        print(angel_broking_data[0])
+    KeyError: 0
+[E 240603 13:07:08 smartConnect:243] Error occurred while making a POST request to https://apiconnect.angelbroking.com/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelbroking.com/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '82:1a:a0:a5:f4:bd', 'Accept': 'application/json', 'X-PrivateKey': 'JDldPrre', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '99926013', 'interval': 'ONE_DAY', 'fromdate': '2024-06-01 00:00', 'todate': '2024-04-04 15:29'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 240603 13:07:08 views:714] API request failed: 'NoneType' object is not subscriptable
+    Traceback (most recent call last):
+      File "/Users/arshil.khan/Desktop/stock_comparison_project/stock_comparison_app/views.py", line 618, in generate_excel_completeness
+        print("Angel Broking data:",  angel_broking_data['data'][0],angel_broking_data['data'][-1])
+    TypeError: 'NoneType' object is not subscriptable

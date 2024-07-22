@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Comparison Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active-tab" onclick="openTab('comparison')">Correctness Check</div>
+            <div class="tab" onclick="openTab('completeness')">Completion Check</div>
+        </div>
+
+        <div id="comparison" class="tab-content active-content">
+            <form method="post" onsubmit="startProcessing(); return checkDateDifference();">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="comparison">
+
+                <!-- Search By -->
+                <label for="search_by">Search By:</label>
+                <select id="search_by" name="search_by" onchange="toggleStockInput('comparison')" required>
+                    <option value="Stock">Stock</option>
+                    <option value="Segment">Segment</option>
+                </select>
+
+                <!-- Segment Option -->
+                <div class="input-container" id="segment_container_comparison" style="display:none;">
+                    <label for="segment">Segment:</label>
+                    <input type="text" id="segment" name="segment" value="Cash" readonly>
+                </div>
+
+                <!-- Stock Name -->
+                <div class="input-container" id="stock_input_container_comparison">
+                    <label for="stock_name">Stock Name:</label>
+                    <input type="text" id="stock_name" name="stock_name" class="input-field" autocomplete="off">
+                    <span class="search-icon">&#128269;</span>
+                    <div id="suggestions" class="suggestions"></div>
+                </div>
+
+                <!-- From Date -->
+                <label for="from_date">From Date:</label>
+                <input type="date" id="from_date" name="from_date" required>
+
+                <!-- To Date -->
+                <label for="to_date">To Date:</label>
+                <input type="date" id="to_date" name="to_date" required>
+
+                <!-- Timeframe -->
+                <label for="timeframe">Timeframe:</label>
+                <select id="timeframe" name="timeframe" required>
+                    <option value="1minute">1 Minute</option>
+                    <option value="30minute">30 Minutes</option>
+                    <option value="day">Day</option>
+                </select>
+
+                <!-- Comparison Type -->
+                <label for="comparison_type">Select Comparison Type:</label>
+                <select id="comparison_type" name="comparison_type" required>
+                    <option value="Upstox">Angel vs Upstox</option>
+                    <option value="Falcon">Angel vs Falcon</option>
+                </select>
+
+                <div id = "OHLCV" style="display: none">
+                <label for="OHLCV">OHLCV:</label>
+                <select  name="OHLCV" required>
+                    <option value="open">Open</option>
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                    <option value="close">Close</option>
+
+                </select>
+                </div>
+                <!-- Threshold Container -->
+                <div class="input-container input-container-threshold" id="threshold_container_comparison" style="display: none" >
+                    <label for="mismatch_threshold">Mismatch Threshold (>=):</label>
+                    <input type="text" id="mismatch_threshold" name="mismatch_threshold" min="0" step="0.01">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id="completeness" class="tab-content">
+            <form method="post" onsubmit="startProcessing();">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="completeness">
+
+                <!-- Search By -->
+                <label for="search_by_2">Search By:</label>
+                <select id="search_by_2" name="search_by" onchange="toggleStockInput('completeness')" required>
+                    <option value="Segment">Segment</option>
+                    <option value="Stock">Stock</option>
+                </select>
+
+                <!-- Segment Option -->
+                <div class="input-container" id="segment_container_completeness">
+                    <label for="segment_2">Segment:</label>
+                    <input type="text" id="segment_2" name="segment" value="Cash" readonly>
+                </div>
+
+                <!-- Stock Name -->
+                <div class="input-container" id="stock_input_container_completeness" style="display:none;">
+                    <label for="stock_name_2">Stock Name:</label>
+                    <input type="text" id="stock_name_2" name="stock_name" class="input-field" autocomplete="off">
+                    <div id="suggestions_2" class="suggestions"></div>
+                </div>
+
+                <!-- From Date -->
+                <label for="from_date_2">From Date:</label>
+                <input type="date" id="from_date_2" name="from_date" required>
+
+                <!-- To Date -->
+                <label for="to_date_2">To Date:</label>
+                <input type="date" id="to_date_2" name="to_date" required>
+
+                <!-- Timeframe -->
+                <label for="timeframe_2">Timeframe:</label>
+                <select id="timeframe_2" name="timeframe" required>
+                    <option value="day">Day</option>
+                </select>
+
+                <!-- Comparison Type -->
+                <label for="comparison_type">Select Comparison Type:</label>
+                <select id="comparison_type" name="comparison_type" required>
+                    <option value="Upstox">Angel vs Upstox</option>
+                </select>
+
+                <!-- Submit Button -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        const stockNames = {{ stock_names|safe }}; // Get stock names from Django context
+
+        // Function to filter stock names based on user input
+        function filterStockNames(input) {
+            return stockNames.filter(name => name.toLowerCase().includes(input.toLowerCase()));
+        }
+
+        // Function to display suggestions
+        function showSuggestions(input, suggestionsDivId, inputId) {
+            const suggestionsDiv = document.getElementById(suggestionsDivId);
+            suggestionsDiv.innerHTML = ""; // Clear previous suggestions
+
+            const filteredNames = filterStockNames(input);
+            filteredNames.forEach(name => {
+                const suggestion = document.createElement("div");
+                suggestion.textContent = name;
+                suggestion.addEventListener("click", () => {
+                    document.getElementById(inputId).value = name;
+                    suggestionsDiv.innerHTML = ""; // Hide suggestions after selection
+                });
+                suggestionsDiv.appendChild(suggestion);
+            });
+
+            if (filteredNames.length === 0) {
+                const noResult = document.createElement("div");
+                noResult.textContent = "No matching stocks found.";
+                suggestionsDiv.appendChild(noResult);
+            }
+        }
+
+        // Event listener for input fields
+        document.getElementById("stock_name").addEventListener("input", (event) => {
+            showSuggestions(event.target.value, "suggestions", "stock_name");
+        });
+
+        document.getElementById("stock_name_2").addEventListener("input", (event) => {
+            showSuggestions(event.target.value, "suggestions_2", "stock_name_2");
+        });
+
+        // Event listener to hide suggestions when clicking outside the input fields
+        document.addEventListener("click", (event) => {
+            if (event.target !== document.getElementById("stock_name") && event.target !== document.getElementById("stock_name_2")) {
+                document.getElementById("suggestions").innerHTML = "";
+                document.getElementById("suggestions_2").innerHTML = "";
+            }
+        });
+
+        // Function to calculate the difference between two dates in years
+        function dateDiffInYears(a, b) {
+            const millisecondsPerYear = 1000 * 60 * 60 * 24 * 365;
+            const diffMilliseconds = Math.abs(b - a);
+            return Math.floor(diffMilliseconds / millisecondsPerYear);
+        }
+
+        // Function to show popup if the difference between From Date and To Date is more than 3 years
+        function checkDateDifference() {
+            const fromDate = new Date(document.getElementById("from_date").value);
+            const toDate = new Date(document.getElementById("to_date").value);
+            const selectedTimeframe = document.getElementById("timeframe").value;
+
+            if (selectedTimeframe === "day") {
+                const yearsDifference = dateDiffInYears(fromDate, toDate);
+                if (yearsDifference > 3) {
+                    alert("Error: More than 3 years of data is not allowed for daily comparison.");
+                    return false; // Prevent form submission
+                }
+            }
+
+            return true; // Allow form submission
+        }
+
+        // Function to open tab content
+        function openTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active-content');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+
+            // Show the selected tab content
+            document.getElementById(tabId).classList.add('active-content');
+
+            // Add active class to the selected tab
+            event.target.classList.add('active-tab');
+        }
+
+        // Function to toggle stock input based on search type
+        // Function to toggle stock input based on search type
+        function toggleStockInput(formType) {
+            const searchById = formType === 'comparison' ? 'search_by' : 'search_by_2';
+            const stockInputContainerId = formType === 'comparison' ? 'stock_input_container_comparison' : 'stock_input_container_completeness';
+            const segmentContainerId = formType === 'comparison' ? 'segment_container_comparison' : 'segment_container_completeness';
+            const thresholdContainerId = 'threshold_container_comparison';
+    const timeframeId = formType === 'comparison' ? 'timeframe' : 'timeframe_2'; // Adjust timeframe ID based on formType
+            const ohlcvId = 'OHLCV';
+
+
+            const searchBy = document.getElementById(searchById).value;
+            const stockInputContainer = document.getElementById(stockInputContainerId);
+            const segmentContainer = document.getElementById(segmentContainerId);
+            const thresholdContainer = document.getElementById(thresholdContainerId);
+    const timeframeSelect = document.getElementById(timeframeId);
+    const ohlcvContainer = document.getElementById(ohlcvId);
+
+            // Hide all containers initially
+            stockInputContainer.style.display = 'none';
+            segmentContainer.style.display = 'none';
+            thresholdContainer.style.display = 'none';
+    timeframeSelect.innerHTML = '';
+ohlcvContainer.style.display = 'none';
+            // Show the container based on the selected search type
+            if (formType === 'comparison') {
+                if (searchBy === 'Stock') {
+                    stockInputContainer.style.display = 'block';
+                                addTimeframeOptions(timeframeSelect, ['1minute', '30minute', 'day']);
+
+                } else if (searchBy === 'Segment') {
+                    segmentContainer.style.display = 'block';
+                    thresholdContainer.style.display = 'block'; // Show threshold input for segment
+                    ohlcvContainer.style.display = 'block'; // Show threshold input for segment
+
+                                addTimeframeOptions(timeframeSelect, ['day']);
+
+                }
+            } else if (formType === 'completeness') {
+                if (searchBy === 'Stock') {
+                    stockInputContainer.style.display = 'block';
+                                addTimeframeOptions(timeframeSelect, ['day']);
+
+                } else if (searchBy === 'Segment') {
+                    segmentContainer.style.display = 'block';
+                                addTimeframeOptions(timeframeSelect, ['day']);
+
+                }
+            }
+        }
+
+function addTimeframeOptions(selectElement, options) {
+    options.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option.charAt(0).toUpperCase() + option.slice(1); // Capitalize first letter
+        selectElement.appendChild(optionElement);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    toggleStockInput('comparison'); // Initialize for the "Correctness Check" tab
+    toggleStockInput('completeness'); // Initialize for the "Completion Check" tab
+});
+</script>
+</body>
+</html>
